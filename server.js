@@ -3,7 +3,7 @@ const dotenv = require("dotenv")
 const morgan = require("morgan")
 const connectDB = require("./config/db.js")
 const authRoutes = require("./routes/authRoute")
-// const cors = require("cors")
+const cors = require("cors")
 
 //configure env
 dotenv.config()
@@ -12,7 +12,7 @@ dotenv.config()
 const app = express()
 
 //middlewares
-// app.use(cors())
+app.use(cors())
 app.use(express.json())
 app.use(morgan("dev"))
 

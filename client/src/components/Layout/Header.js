@@ -67,7 +67,7 @@ const Header = () => {
           {cartCount > 0 && <span className='count-badge'>{cartCount}</span>}
         </div>
         <div className='icon'>
-          <NavLink to='/profile' className='icon-navlink'>
+          <NavLink to='/login' className='icon-navlink'>
             <AiOutlineUser />
           </NavLink>
         </div>
