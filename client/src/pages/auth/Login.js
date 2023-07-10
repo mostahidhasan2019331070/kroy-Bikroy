@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react"
 import Layout from "../../components/Layout/Layout"
 import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
+import { useAuth } from "../../context/auth"
 
 const Login = () => {
   const emailInputRef = useRef(null)
@@ -9,6 +10,7 @@ const Login = () => {
   // const [email, setEmail] = useState("")
   // const [password, setPassword] = useState("")
   const navigate = useNavigate()
+  const [auth, setAuth] = useAuth()
 
   useEffect(() => {
     emailInputRef.current.focus()
@@ -29,6 +31,12 @@ const Login = () => {
       )
       if (res.data.success) {
         //toast.success(res.data.message)
+        setAuth({
+          ...auth,
+          user: res.data.user,
+          token: res.data.token,
+        })
+        localStorage.setItem("auth", JSON.stringify(res.data))
         navigate("/")
       } else {
         //toast.error(res.data.message)
