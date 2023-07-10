@@ -18,6 +18,7 @@
   --onyx: hsl(0, 0%, 27%);
   --primary-color: #ff4b2b;
   --hover-color: #eb3223;
+  --ternary-color: #bf350fbb;
 
   /**
    * typography
@@ -227,7 +228,7 @@
 .footer {
   color: white;
   padding: 25px;
-  background: #000000;
+  background: var(--ternary-color);
 }
 
 .footer a {
@@ -281,8 +282,7 @@ span {
   margin: 15px 0;
 }
 
-.form-container button,
-.overlay-container button {
+.form-container button {
   border-radius: 20px;
   border: 1px solid #ff4b2b;
   background-color: #ff4b2b;
@@ -299,18 +299,15 @@ span {
   background-color: var(--hover-color);
 }
 
-.form-container button:active,
-.overlay-container button:active {
+.form-container button:active {
   transform: scale(0.95);
 }
 
-.form-container button:focus,
-.overlay-container button:focus {
+.form-container button:focus {
   outline: none;
 }
 
-.form-container button.ghost,
-.overlay-container button.ghost {
+.form-container button.ghost {
   background-color: transparent;
   border-color: #ffffff;
 }
@@ -359,24 +356,6 @@ form {
   z-index: 2;
 }
 
-.container.right-panel-active .sign-in-container {
-  transform: translateX(100%);
-}
-
-.sign-up-container {
-  left: 0;
-  width: 50%;
-  opacity: 0;
-  z-index: 1;
-}
-
-.container.right-panel-active .sign-up-container {
-  transform: translateX(100%);
-  opacity: 1;
-  z-index: 5;
-  animation: show 0.6s;
-}
-
 @keyframes show {
   0%,
   49.99% {
@@ -402,10 +381,6 @@ form {
   z-index: 100;
 }
 
-.container.right-panel-active .overlay-container {
-  transform: translateX(-100%);
-}
-
 .overlay {
   background: #ff416c;
   background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
@@ -420,10 +395,6 @@ form {
   width: 200%;
   transform: translateX(0);
   transition: transform 0.6s ease-in-out;
-}
-
-.container.right-panel-active .overlay {
-  transform: translateX(50%);
 }
 
 .overlay-panel {
@@ -441,21 +412,9 @@ form {
   transition: transform 0.6s ease-in-out;
 }
 
-.overlay-left {
-  transform: translateX(-20%);
-}
-
-.container.right-panel-active .overlay-left {
-  transform: translateX(0);
-}
-
 .overlay-right {
   right: 0;
   transform: translateX(0);
-}
-
-.container.right-panel-active .overlay-right {
-  transform: translateX(20%);
 }
 
 .social-container {
@@ -484,4 +443,25 @@ form {
 
 .forgot-password:hover {
   color: var(--primary-color);
+}
+
+/* category */
+
+.category {
+}
+
+.category-section {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  height: 50px;
+  background: var(--ternary-color);
+  color: #ffffff;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.category-items {
+  list-style-type: none;
 }
