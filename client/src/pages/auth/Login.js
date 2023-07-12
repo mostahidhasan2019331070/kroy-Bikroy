@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
 import Layout from "../../components/Layout/Layout"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useLocation } from "react-router-dom"
 import axios from "axios"
 import { useAuth } from "../../context/auth"
 
@@ -10,6 +10,7 @@ const Login = () => {
   // const [email, setEmail] = useState("")
   // const [password, setPassword] = useState("")
   const navigate = useNavigate()
+  const location = useLocation()
   const [auth, setAuth] = useAuth()
 
   useEffect(() => {
@@ -37,7 +38,7 @@ const Login = () => {
           token: res.data.token,
         })
         localStorage.setItem("auth", JSON.stringify(res.data))
-        navigate("/")
+        navigate(location.state || "/")
       } else {
         //toast.error(res.data.message)
       }
