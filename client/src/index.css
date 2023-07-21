@@ -160,6 +160,7 @@
   margin-left: 15px; /* Increase the gap between icons */
   font-size: 30px; /* Increase the size of icons */
   position: relative;
+  cursor: pointer;
 }
 
 .icon-navlink {
@@ -451,9 +452,9 @@ form {
 }
 
 .category-section {
-  padding: 0 !important;
-  margin: 0 !important;
-  width: 100% !important;
+  padding: 0;
+  margin: 0;
+  width: 100%;
   height: 50px;
   background: var(--ternary-color);
   color: #ffffff;
@@ -464,4 +465,34 @@ form {
 
 .category-items {
   list-style-type: none;
+}
+
+/* Option Lists and Links */
+.options-list {
+  position: absolute;
+  top: 100%;
+  right: -72px;
+  width: 100px;
+  font-size: 15px;
+  /* display: none; */
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 5px 0;
+}
+
+.options-list li {
+  list-style: none;
+}
+
+.option-link {
+  display: block;
+  padding: 8px 16px;
+  color: #0b0a0a;
+  text-decoration: none;
+}
+
+.option-link:hover {
+  background-color: #f9f9f9;
+  border-bottom: 2px solid var(--primary-color);
 }

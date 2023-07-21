@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import {
   AiOutlineMessage,
   AiOutlineHeart,
@@ -15,6 +15,7 @@ import { useAuth } from "../../context/auth"
 const Header = () => {
   const searchInputRef = useRef(null)
   const [auth, setAuth] = useAuth()
+  const [showOptions, setShowOptions] = useState(false)
 
   const handleLogout = () => {
     setAuth({
@@ -79,19 +80,49 @@ const Header = () => {
             </NavLink>
             {cartCount > 0 && <span className='count-badge'>{cartCount}</span>}
           </div>
-          <div className='icon'>
-            {!auth.user ? (
-              <NavLink to='/login' className='icon-navlink'>
-                <AiOutlineUser />
-              </NavLink>
-            ) : (
-              <NavLink
-                onClick={handleLogout}
-                to='/login'
-                className='icon-navlink'
-              >
-                <AiOutlineUser />
-              </NavLink>
+          <div
+            className='icon'
+            onMouseEnter={() => setShowOptions(true)}
+            onMouseLeave={() => setShowOptions(false)}
+          >
+            <NavLink to='' className='icon-navlink'>
+              <AiOutlineUser />
+            </NavLink>
+            {showOptions && (
+              <ul className='options-list'>
+                {!auth.user ? (
+                  <>
+                    <li>
+                      <Link to='/login' className='option-link'>
+                        Sign In
+                      </Link>
+                    </li>
+
+                    <li>
+                      <Link to='/register' className='option-link'>
+                        Sign Up
+                      </Link>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <Link to='/dashboard' className='option-link'>
+                        Dashboard
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to='/login'
+                        className='option-link'
+                        onClick={handleLogout}
+                      >
+                        Logout
+                      </Link>
+                    </li>
+                  </>
+                )}
+              </ul>
             )}
           </div>
         </div>
