@@ -107,7 +107,12 @@ const Header = () => {
                 ) : (
                   <>
                     <li>
-                      <Link to='/dashboard' className='option-link'>
+                      <Link
+                        to={`/dashboard/${
+                          auth?.user?.role === 1 ? "admin" : "user"
+                        }`}
+                        className='option-link'
+                      >
                         Dashboard
                       </Link>
                     </li>
