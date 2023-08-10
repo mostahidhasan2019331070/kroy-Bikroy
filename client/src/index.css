@@ -496,3 +496,23 @@ form {
   background-color: #f9f9f9;
   border-bottom: 2px solid var(--primary-color);
 }
+
+/* image button */
+
+.image-container {
+  width: 250px; /* Set the width of the container */
+  height: 150px; /* Set the height of the container */
+  overflow: hidden; /* Hide any overflow of the image */
+  position: relative; /* Establish a positioning context for absolute positioning */
+}
+
+.image-container img {
+  width: 100%; /* Make the image take up the entire width of the container */
+  height: auto; /* Automatically adjust the height to maintain aspect ratio */
+  display: block; /* Remove any default spacing below the image */
+  position: absolute; /* Position the image within the container */
+  top: 0; /* Position the image at the top */
+  left: 0; /* Position the image at the left */
+  object-fit: cover; /* Scale the image to cover the container while maintaining aspect ratio */
+  object-position: center; /* Center the image within the container */
+}

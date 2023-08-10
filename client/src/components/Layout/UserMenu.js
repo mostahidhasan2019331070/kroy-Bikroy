@@ -14,6 +14,12 @@ const UserMenu = () => {
             Profile
           </NavLink>
           <NavLink
+            to='/dashboard/user/create-product'
+            className='list-group-item list-group-item-action'
+          >
+            Add to Sell
+          </NavLink>
+          <NavLink
             to='/dashboard/user/orders'
             className='list-group-item list-group-item-action'
           >

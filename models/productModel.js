@@ -27,6 +27,10 @@ const productSchema = new mongoose.Schema(
       data: Buffer,
       contentType: String,
     },
+    address: {
+      type: String,
+      required: true,
+    },
     available: {
       type: Boolean,
       default: true,
