@@ -3,21 +3,50 @@ import Layout from "../../components/Layout/Layout"
 import UserMenu from "../../components/Layout/UserMenu"
 import axios from "axios"
 import { Select } from "antd"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useAuth } from "../../context/auth"
 const { Option } = Select
 
-const CreateProduct = () => {
+const UpdateProduct = () => {
   const [auth] = useAuth()
   const navigate = useNavigate()
+  const params = useParams()
   const [categories, setCategories] = useState([])
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [price, setPrice] = useState("")
   const [category, setCategory] = useState("")
+  const [id, setId] = useState("")
   const [address, setAddress] = useState("")
   //const [available, setAvailable] = useState("")
   const [image, setImage] = useState("")
+
+  // fetching product information
+
+  const getProductInformation = async () => {
+    try {
+      const res = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/product/get-product/${params.slug}`
+      )
+
+      if (res?.data.success) {
+        setName(res?.data.product.name)
+        setDescription(res?.data.product.description)
+        setPrice(res?.data.product.price)
+        setId(res?.data.product._id)
+        setCategory(res?.data.product.category._id)
+        setImage(res?.data.product.image)
+        setAddress(res?.data.product.address)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getProductInformation()
+    //eslint-disable-next-line
+  }, [])
 
   // fetching categories function
 
@@ -38,7 +67,7 @@ const CreateProduct = () => {
     getAllCategories()
   }, [])
 
-  const handleCreate = async (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault()
     try {
       const productData = new FormData()
@@ -47,18 +76,32 @@ const CreateProduct = () => {
       productData.append("price", price)
       productData.append("category", category)
       productData.append("address", address)
-      productData.append("image", image)
+      image && productData.append("image", image)
       productData.append("seller", auth.user.id)
-
       console.log(productData)
 
-      const res = await axios.post(
-        `${process.env.REACT_APP_API}/api/v1/product/create-product`,
+      const res = await axios.put(
+        `${process.env.REACT_APP_API}/api/v1/product/update-product/${id}`,
         productData
       )
 
       if (res?.data.success) {
-        //navigate("/dashboard/user/your-products")
+        navigate("/dashboard/user/your-products")
+        //navigate("/dashboard/user")
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleDelete = async () => {
+    try {
+      let answer = window.prompt("are you sure?")
+      if (!answer) return
+      const res = await axios.delete(
+        `${process.env.REACT_APP_API}/api/v1/product/delete-product/${id}`
+      )
+      if (res?.data.success) {
         navigate("/dashboard/user/your-products")
       }
     } catch (error) {
@@ -74,7 +117,7 @@ const CreateProduct = () => {
             <UserMenu />
           </div>
           <div className='col-md-9'>
-            <h1>Create Product</h1>
+            <h1>Update Product</h1>
             <div className='m-1 w-75'>
               <Select
                 bordered={false}
@@ -86,6 +129,7 @@ const CreateProduct = () => {
                   setCategory(value)
                 }}
                 required
+                value={category}
               >
                 {categories?.map((c) => (
                   <Option key={c._id} value={c._id}>
@@ -145,7 +189,11 @@ const CreateProduct = () => {
                       className='img img-responsive'
                     />
                   ) : (
-                    "Upload Image"
+                    <img
+                      src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${id}`}
+                      alt='product_image'
+                      className='img img-responsive'
+                    />
                   )}
                   <input
                     type='file'
@@ -219,10 +267,17 @@ const CreateProduct = () => {
                   </div>
                 </div> */}
               </div>
-              <div className='mb-3 text-center'>
-                <button className='btn btn-primary' onClick={handleCreate}>
-                  ADD TO SELL
-                </button>
+              <div className='d-flex'>
+                <div className='mb-3 mr-10'>
+                  <button className='btn btn-primary' onClick={handleUpdate}>
+                    UPDATE
+                  </button>
+                </div>
+                <div className='mb-3'>
+                  <button className='btn btn-danger' onClick={handleDelete}>
+                    DELETE
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -232,4 +287,4 @@ const CreateProduct = () => {
   )
 }
 
-export default CreateProduct
+export default UpdateProduct

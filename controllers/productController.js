@@ -4,8 +4,16 @@ const fs = require("fs")
 
 const createProductController = async (req, res) => {
   try {
-    const { name, slug, description, price, category, available, address } =
-      req.fields
+    const {
+      name,
+      slug,
+      description,
+      price,
+      category,
+      available,
+      address,
+      seller,
+    } = req.fields
     const { image } = req.files
 
     //validation
@@ -15,6 +23,8 @@ const createProductController = async (req, res) => {
         return res.status(500).send({ error: "name is required" })
       case !address:
         return res.status(500).send({ error: "address is required" })
+      case !seller:
+        return res.status(500).send({ error: "seller is required" })
       case !image || image.size > 1000000:
         return res
           .status(500)
@@ -131,8 +141,16 @@ const deleteProductController = async (req, res) => {
 
 const updateProductController = async (req, res) => {
   try {
-    const { name, slug, description, price, category, available, address } =
-      req.fields
+    const {
+      name,
+      slug,
+      description,
+      price,
+      category,
+      available,
+      address,
+      seller,
+    } = req.fields
     const { image } = req.files
 
     //validation
@@ -142,6 +160,8 @@ const updateProductController = async (req, res) => {
         return res.status(500).send({ error: "name is required" })
       case !address:
         return res.status(500).send({ error: "address is required" })
+      case !seller:
+        return res.status(500).send({ error: "seller is required" })
       case !image || image.size > 1000000:
         return res
           .status(500)

@@ -97,6 +97,7 @@ const login = async (req, res) => {
       success: true,
       message: "login successful",
       user: {
+        id: user._id,
         reg_no: user.reg_no,
         name: user.name,
         email: user.email,

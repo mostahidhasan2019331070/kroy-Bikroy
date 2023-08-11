@@ -20,10 +20,10 @@ const UserMenu = () => {
             Add to Sell
           </NavLink>
           <NavLink
-            to='/dashboard/user/orders'
+            to='/dashboard/user/your-products'
             className='list-group-item list-group-item-action'
           >
-            Orders
+            Your Products
           </NavLink>
         </div>
       </div>

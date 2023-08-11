@@ -516,3 +516,17 @@ form {
   object-fit: cover; /* Scale the image to cover the container while maintaining aspect ratio */
   object-position: center; /* Center the image within the container */
 }
+
+/* product link */
+
+.product-link {
+  text-decoration: none;
+  color: #0b0a0a;
+}
+
+/* product card */
+.card-container {
+  display: flex;
+  flex-wrap: wrap; /* This will wrap cards to the next line when necessary */
+  /* max-width: 100%; Ensure the container doesn't exceed the screen width */
+}
