@@ -4,10 +4,12 @@ import UserMenu from "../../components/Layout/UserMenu"
 import axios from "axios"
 import { useAuth } from "../../context/auth"
 import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const YourProducts = () => {
   const [auth] = useAuth()
   const [products, setProducts] = useState([])
+  const navigate = useNavigate()
 
   const getAllProducts = async () => {
     try {
@@ -33,6 +35,11 @@ const YourProducts = () => {
   useEffect(() => {
     getAllProducts()
   }, [])
+
+  const handleClick = async (slug) => {
+    navigate(`/dashboard/user/product/${slug}`)
+  }
+
   return (
     <Layout>
       <div className='container-fluid m-3 p-3'>
@@ -44,23 +51,22 @@ const YourProducts = () => {
             <h1 className='text-center'>Your Products</h1>
             <div className='card-container'>
               {products.map((p) => (
-                <Link
+                <div
+                  className='card m-2 prouct-link'
+                  style={{ width: "20rem" }}
                   key={p._id}
-                  to={`/dashboard/user/product/${p.slug}`}
-                  className='product-link'
+                  onClick={() => handleClick(p.slug)}
                 >
-                  <div className='card m-2' style={{ width: "18rem" }}>
-                    <img
-                      src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
-                      className='card-img-top'
-                      alt={p.name}
-                    />
-                    <div className='card-body'>
-                      <h5 className='card-title'>{p.name}</h5>
-                      <p className='card-text'>{p.description.slice(0, 100)}</p>
-                    </div>
+                  <img
+                    src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
+                    className='card-img-top'
+                    alt={p.name}
+                  />
+                  <div className='card-body'>
+                    <h5 className='card-title'>{p.name}</h5>
+                    <p className='card-text'>{p.description.slice(0, 100)}</p>
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
           </div>

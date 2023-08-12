@@ -54,7 +54,10 @@ const Header = () => {
         </div>
         <div className='icons'>
           <div className='icon'>
-            <NavLink to='/sell' className='icon-navlink'>
+            <NavLink
+              to='/dashboard/user/create-product'
+              className='icon-navlink'
+            >
               <AiOutlinePlusCircle />
             </NavLink>
           </div>

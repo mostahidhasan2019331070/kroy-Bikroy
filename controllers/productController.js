@@ -202,6 +202,73 @@ const updateProductController = async (req, res) => {
   }
 }
 
+const productFilterController = async (req, res) => {
+  try {
+    const { filter, min, max, selectedCategoryId } = req.body
+    let args = {}
+    if (selectedCategoryId) {
+      args.category = selectedCategoryId
+    }
+    if (filter) {
+      args.price = { $gte: min, $lte: max }
+    }
+    const products = await productModel.find(args)
+    res.status(200).send({
+      success: true,
+      products,
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(400).send({
+      success: false,
+      error,
+      message: "Error in filtering products",
+    })
+  }
+}
+
+const productCountController = async (req, res) => {
+  try {
+    const total = await productModel.find({}).estimatedDocumentCount()
+    res.status(200).send({
+      success: true,
+      total,
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(400).send({
+      success: false,
+      error,
+      message: "Error in product count",
+    })
+  }
+}
+
+const productListController = async (req, res) => {
+  try {
+    const perPage = 6
+    const page = req.params.page ? req.params.page : 1
+    const products = await productModel
+      .find({})
+      .select("-image")
+      .skip((page - 1) * perPage)
+      .limit(perPage)
+      .sort({ createdAt: -1 })
+
+    res.status(200).send({
+      success: true,
+      products,
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(400).send({
+      success: false,
+      error,
+      message: "Error in product page",
+    })
+  }
+}
+
 module.exports = {
   createProductController,
   getAllProductController,
@@ -209,4 +276,7 @@ module.exports = {
   getProductImageController,
   deleteProductController,
   updateProductController,
+  productFilterController,
+  productCountController,
+  productListController,
 }

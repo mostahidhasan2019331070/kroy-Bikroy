@@ -5,14 +5,17 @@ import App from "./App"
 import reportWebVitals from "./reportWebVitals"
 import { BrowserRouter } from "react-router-dom"
 import { AuthProvider } from "./context/auth"
+import { CategoryProvider } from "./context/CategoryContext"
 import "antd/dist/reset.css"
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
   <AuthProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <CategoryProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </CategoryProvider>
   </AuthProvider>
 )
 
