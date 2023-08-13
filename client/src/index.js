@@ -6,15 +6,18 @@ import reportWebVitals from "./reportWebVitals"
 import { BrowserRouter } from "react-router-dom"
 import { AuthProvider } from "./context/auth"
 import { CategoryProvider } from "./context/CategoryContext"
+import { SearchProvider } from "./context/SearchContext"
 import "antd/dist/reset.css"
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
   <AuthProvider>
     <CategoryProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <SearchProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </SearchProvider>
     </CategoryProvider>
   </AuthProvider>
 )

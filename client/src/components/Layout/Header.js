@@ -11,9 +11,9 @@ import { NavLink, Link } from "react-router-dom"
 import logo from "../../images/logo1.png"
 import Category from "./Category"
 import { useAuth } from "../../context/auth"
+import SearchInput from "../Form/SearchInput"
 
 const Header = () => {
-  const searchInputRef = useRef(null)
   const [auth, setAuth] = useAuth()
   const [showOptions, setShowOptions] = useState(false)
 
@@ -26,10 +26,6 @@ const Header = () => {
     localStorage.removeItem("auth")
   }
 
-  useEffect(() => {
-    searchInputRef.current.focus()
-  }, [])
-
   // Example counts
   const cartCount = 3
   const messageCount = 15
@@ -41,8 +37,9 @@ const Header = () => {
         <Link to='/' className='logo'>
           <img src={logo} alt='Kroy-Bikroy Logo' className='logo-img' />
         </Link>
-        <div className='search-box'>
-          <input
+        {/* <div className='search-box'> */}
+        <SearchInput />
+        {/* <input
             type='text'
             placeholder='Enter the product name...'
             ref={searchInputRef}
@@ -50,8 +47,8 @@ const Header = () => {
           />
           <div className='search-icon'>
             <AiOutlineSearch />
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
         <div className='icons'>
           <div className='icon'>
             <NavLink

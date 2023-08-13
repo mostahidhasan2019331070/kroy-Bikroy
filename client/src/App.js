@@ -17,6 +17,7 @@ import YourProducts from "./pages/user/YourProducts"
 import CreateProduct from "./pages/user/CreateProduct"
 import Products from "./pages/admin/Products"
 import UpdateProduct from "./pages/user/UpdateProduct"
+import Search from "./pages/Search"
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path='/about' element={<About />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/search' element={<Search />} />
         <Route path='/dashboard' element={<PrivateRoute />}>
           <Route path='user' element={<Dashboard />} />
           <Route path='user/profile' element={<Profile />} />
