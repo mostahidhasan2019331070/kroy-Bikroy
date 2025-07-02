@@ -101,14 +101,4 @@ Front‑end tests use **Vitest** + **React Testing Library**: `cd client && npm 
 * [ ] Email/password reset flow.
 * [ ] Social login (Google OAuth).
 
-Contributions welcomed – see below! 👇
 
----
-
-## 🤝 Contributing
-
-1. Fork → feature branch → PR.
-2. Run `npm run lint:fix` before pushing.
-3. Add/adjust unit tests for new functionality.
-
----
